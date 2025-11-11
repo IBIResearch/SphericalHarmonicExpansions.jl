@@ -1,0 +1,139 @@
+===== SIZE: nvars=3 degree=2 nterms=20 =====
+
+=== Benchmarking DynamicPolynomials ===
+Building polynomials (definition)...
+(timing polynomial construction — result will be created afterwards)
+  1.969 ms (3736 allocations: 184.75 KiB)
+  1.970 ms (3844 allocations: 189.44 KiB)
+Running basic operation benchmarks:
+Addition:
+  2.622 μs (75 allocations: 3.78 KiB)
+Multiplication:
+  574.600 μs (533 allocations: 32.25 KiB)
+Evaluation at random numeric point:
+  1.455 ms (1480 allocations: 93.29 KiB)
+
+=== Benchmarking TypedPolynomials ===
+Building polynomials (definition)...
+(timing polynomial construction — result will be created afterwards)
+  16.652 ms (12995 allocations: 722.83 KiB)
+  15.398 ms (12931 allocations: 720.04 KiB)
+Running basic operation benchmarks:
+Addition:
+  98.729 ns (2 allocations: 848 bytes)
+Multiplication:
+  3.487 μs (8 allocations: 10.96 KiB)
+Evaluation at random numeric point:
+  725.100 μs (810 allocations: 46.04 KiB)
+
+===== SIZE: nvars=4 degree=5 nterms=60 =====
+
+=== Benchmarking DynamicPolynomials ===
+Building polynomials (definition)...
+(timing polynomial construction — result will be created afterwards)
+  10.197 ms (19795 allocations: 1003.47 KiB)
+  10.031 ms (19921 allocations: 997.20 KiB)
+Running basic operation benchmarks:
+Addition:
+  8.500 μs (257 allocations: 15.50 KiB)
+Multiplication:
+  11.547 ms (6531 allocations: 514.33 KiB)
+Evaluation at random numeric point:
+  8.925 ms (7903 allocations: 435.25 KiB)
+
+=== Benchmarking TypedPolynomials ===
+Building polynomials (definition)...
+(timing polynomial construction — result will be created afterwards)
+  48.993 ms (33190 allocations: 1.76 MiB)
+  49.207 ms (33251 allocations: 1.76 MiB)
+Running basic operation benchmarks:
+Addition:
+  610.286 ns (3 allocations: 4.72 KiB)
+Multiplication:
+  294.000 μs (14 allocations: 403.83 KiB)
+Evaluation at random numeric point:
+  9.365 ms (8761 allocations: 461.95 KiB)
+
+===== SIZE: nvars=5 degree=10 nterms=300 =====
+
+=== Benchmarking DynamicPolynomials ===
+Building polynomials (definition)...
+(timing polynomial construction — result will be created afterwards)
+  73.283 ms (207924 allocations: 11.48 MiB)
+  72.869 ms (207604 allocations: 11.45 MiB)
+Running basic operation benchmarks:
+Addition:
+  44.900 μs (1233 allocations: 72.26 KiB)
+Multiplication:
+  509.312 ms (179451 allocations: 14.61 MiB)
+Evaluation at random numeric point:
+  66.002 ms (60254 allocations: 3.23 MiB)
+
+=== Benchmarking TypedPolynomials ===
+Building polynomials (definition)...
+(timing polynomial construction — result will be created afterwards)
+  115.028 ms (86398 allocations: 5.99 MiB)
+  111.294 ms (86411 allocations: 5.99 MiB)
+Running basic operation benchmarks:
+Addition:
+  3.237 μs (3 allocations: 28.21 KiB)
+Multiplication:
+  14.508 ms (22 allocations: 15.08 MiB)
+Evaluation at random numeric point:
+  67.296 ms (63236 allocations: 3.24 MiB)
+
+===== SIZE: nvars=6 degree=20 nterms=1200 =====
+
+=== Benchmarking DynamicPolynomials ===
+Building polynomials (definition)...
+(timing polynomial construction — result will be created afterwards)
+  415.454 ms (2030806 allocations: 131.56 MiB)
+  413.002 ms (2030652 allocations: 131.57 MiB)
+Running basic operation benchmarks:
+Addition:
+  192.200 μs (4845 allocations: 371.40 KiB)
+Multiplication:
+  10.838 s (2880067 allocations: 268.80 MiB)
+Evaluation at random numeric point:
+  349.034 ms (314886 allocations: 14.75 MiB)
+
+=== Benchmarking TypedPolynomials ===
+Building polynomials (definition)...
+(timing polynomial construction — result will be created afterwards)
+  447.648 ms (335303 allocations: 53.11 MiB)
+  405.573 ms (333524 allocations: 53.05 MiB)
+Running basic operation benchmarks:
+Addition:
+  13.600 μs (3 allocations: 131.32 KiB)
+Multiplication:
+  336.433 ms (31 allocations: 325.56 MiB)
+Evaluation at random numeric point:
+  362.283 ms (332990 allocations: 15.09 MiB)
+
+===== SIZE: nvars=8 degree=40 nterms=5000 =====
+
+=== Benchmarking DynamicPolynomials ===
+Building polynomials (definition)...
+(timing polynomial construction — result will be created afterwards)
+  3.324 s (28266321 allocations: 2.13 GiB)
+  3.359 s (28262770 allocations: 2.13 GiB)
+Running basic operation benchmarks:
+Addition:
+  882.100 μs (20053 allocations: 1.86 MiB)
+Multiplication:
+  290.588 s (50000083 allocations: 4.74 GiB)
+Evaluation at random numeric point:
+  2.130 s (1751348 allocations: 82.71 MiB)
+
+=== Benchmarking TypedPolynomials ===
+Building polynomials (definition)...
+(timing polynomial construction — result will be created afterwards)
+  2.985 s (2447692 allocations: 966.81 MiB)
+  2.579 s (1720319 allocations: 930.32 MiB)
+Running basic operation benchmarks:
+Addition:
+  82.700 μs (3 allocations: 703.19 KiB)
+Multiplication:
+  8.378 s (39 allocations: 6.24 GiB)
+Evaluation at random numeric point:
+  2.014 s (1861385 allocations: 84.90 MiB)
