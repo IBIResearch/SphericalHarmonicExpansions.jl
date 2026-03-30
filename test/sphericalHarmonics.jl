@@ -11,12 +11,6 @@
 		@test SphericalHarmonicExpansions.trinomialExpansion(n , x, y, z) == (x^2+y^2+z^2)^n
 	end
 
-	#test that ylm is a polynomial of correct type
-	for l = 0:3
-		for m = -l:l
-			@test typeof(ylm(0,0,x,y,z)) == Polynomial{Float64,Term{Float64,Monomial{(x, y, z),3}},Array{Term{Float64,Monomial{(x, y, z),3}},1}}
-		end
-	end
 	#@test_throws(ErrorException(BoundsError), ylm(0,1,x,y,z))
 	@test_throws DomainError ylm(0,1,x,y,z)
 	# l = 0

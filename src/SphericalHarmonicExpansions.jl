@@ -1,9 +1,8 @@
 module SphericalHarmonicExpansions
 
 using LinearAlgebra, Reexport, HDF5, Combinatorics
-import MultivariatePolynomials: terms, degree, polynomial
 import StaticPolynomials
-@reexport using TypedPolynomials
+@reexport using DynamicPolynomials
 
 include("sphericalHarmonic.jl")
 export ylm, rlylm

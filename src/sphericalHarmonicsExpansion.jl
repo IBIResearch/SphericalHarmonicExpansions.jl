@@ -1,10 +1,10 @@
 import Base.setindex!, Base.getindex, Base.isapprox, Base.==, Base.!=,
         Base.+, Base.-, Base.*, Base./, Base.write
 
-mutable struct SphericalHarmonicCoefficients{T<:Real}
-  c::AbstractVector{T}
-  L::Integer
-  R::Real
+mutable struct SphericalHarmonicCoefficients{T<:Real, vecT<:AbstractVector{T}}
+  c::vecT
+  L::Int64
+  R::Float64
   solid::Bool
 
   function SphericalHarmonicCoefficients(c::AbstractVector{T}, L::Real, R::Real,solid::Bool) where T<:Real
@@ -14,7 +14,7 @@ mutable struct SphericalHarmonicCoefficients{T<:Real}
     if (!isinteger(sqrt(length(c))) || length(c)==0)
       throw(DomainError(sqrt(length(c)),"Input vector needs to be of size (L+1)², where L ∈ ℕ₀."))
     end 
-    return new{T}(c,L,R,solid)
+    return new{T, typeof(c)}(c,L,R,solid)
   end
 
   SphericalHarmonicCoefficients(c::AbstractVector{<:Real}) = SphericalHarmonicCoefficients(c, sqrt(length(c))-1, 1.0, false)
@@ -156,7 +156,8 @@ end
           `x, y, z`   - Cartesian coordinates\\
 *Output:*  Spherical/Solid harmonics expansion
 """
-function sphericalHarmonicsExpansion(Clm::SphericalHarmonicCoefficients, x::Variable, y::Variable, z::Variable)
+function sphericalHarmonicsExpansion(Clm::SphericalHarmonicCoefficients, x::T, y::T, z::T) where {T<:AbstractVariable}
+
   sum = 0
   for l in 0:Clm.L, m in -l:l
     if Clm[l,m] == 0
@@ -168,6 +169,32 @@ function sphericalHarmonicsExpansion(Clm::SphericalHarmonicCoefficients, x::Vari
     else
       # spherical expansion
       sum += Clm[l,m] * rlylm(l,m,x,y,z)
+    end
+  end
+  return sum
+end
+
+function sphericalHarmonicsExpansion(Clm::Vector{PolyVar{true}}, x::T, y::T, z::T, solid::Bool) where {T<:AbstractVariable}
+  L = sqrt(length(Clm)) - 1
+  if !isinteger(L)
+    throw(DomainError(L,"Input vector needs to be of size (L+1)², where L ∈ ℕ₀."))
+  else
+    L = convert(Int,L)
+  end
+
+  sum = 0
+
+  for l in 0:L
+    for m in -l:l
+      if Clm[l * (l+1) + m + 1] != 0
+          if solid
+              # solid expansion
+              sum += Clm[l * (l+1) + m + 1] * zlm(l,m,x,y,z)
+          else
+              # spherical expansion
+              sum += Clm[l * (l+1) + m + 1] * rlylm(l,m,x,y,z)
+          end
+      end
     end
   end
   return sum

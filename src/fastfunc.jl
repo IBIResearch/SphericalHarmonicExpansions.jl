@@ -90,7 +90,7 @@ julia> ps(r)
 ```
 """
 function fastfunc(polynomial)
-    ps = StaticPolynomials.Polynomial(polynomial, Variable[variables(polynomial)...], nothing)
+    ps = StaticPolynomials.Polynomial(polynomial)
     return ps
 end
 
