@@ -16,6 +16,7 @@ WignerD = "87c4ff3e-34df-11e9-37a7-516cea4e0402"
 [compat]
 Combinatorics = "1.0"
 HDF5 = "0.16, 0.17"
+LinearAlgebra = "< 0.0.1, 1.6"
 MultivariatePolynomials = "0.4, 0.5"
 Reexport = "1.0"
 StaticPolynomials = "1.3"
