@@ -23,7 +23,10 @@ mutable struct SphericalHarmonicCoefficients{T<:Real}
 
   SphericalHarmonicCoefficients(L::Int,R::Real,solid::Bool) = SphericalHarmonicCoefficients(zeros((L+1)^2), L, R, solid)
 
-  SphericalHarmonicCoefficients(c::AbstractVector{<:Real},R::Float64,solid::Bool) = SphericalHarmonicCoefficients(c,sqrt(length(c))-1,R,solid)
+  SphericalHarmonicCoefficients(c::AbstractVector{<:Real},R::Real,solid::Bool) = SphericalHarmonicCoefficients(c,sqrt(length(c))-1,R,solid)
+
+  SphericalHarmonicCoefficients(::Type{T}, L::Integer; R::Real=one(T), solid::Bool=false) where {T<:Real} =
+    SphericalHarmonicCoefficients(zeros(T, (L+1)^2), L, R, solid)
 
   function SphericalHarmonicCoefficients(c::AbstractArray{<:AbstractVector{T}},R::AbstractArray{<:Real},solid::AbstractArray{<:Bool}) where T<:Real
     if size(c) != size(R) || size(c) != size(solid)
@@ -39,7 +42,7 @@ mutable struct SphericalHarmonicCoefficients{T<:Real}
   # write and read coefficients to/from an HDF5-file
   function SphericalHarmonicCoefficients(path::String)
     coeffs, R, solid = h5open(path,"r") do file
-      coeffsArray = read(file, "/coeffs")
+      coeffsArray = read(file, "/coeffs")
       R = read(file, "/normalization")
       solid = (read(file, "/solid") .== 1)
 
@@ -80,7 +83,7 @@ function write(path::String, coeffs::AbstractArray{<:SphericalHarmonicCoefficien
   end
 
   h5open(path,"w") do file
-      write(file, "/coeffs", coeffsArray)
+      write(file, "/coeffs", coeffsArray)
       write(file, "/normalization", R)
       write(file, "/solid", solid)
   end

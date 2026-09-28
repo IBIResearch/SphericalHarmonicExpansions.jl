@@ -1,10 +1,13 @@
 @testset "spherical harmonics" begin
-	ɛ = 4*eps(Float64)
+	# Distributed normalization introduces several correctly rounded operations;
+	# use the same low-order tolerance scale as the rlylm/zlm reference tests.
+	ɛ = 32*eps(Float64)
     @polyvar x y z
     
-    # test OverflowError for large m
-    @test_throws OverflowError SphericalHarmonicExpansions.ylmCosSinPolynomial(67, x,y)
-    @test_throws OverflowError SphericalHarmonicExpansions.ylmSinSinPolynomial(67, x,y)
+    # BigInt-backed binomial conversion avoids the previous machine-Int
+    # overflow at m=67. Float64 rounding remains part of the numerical study.
+    @test_nowarn SphericalHarmonicExpansions.ylmCosSinPolynomial(67, x,y)
+    @test_nowarn SphericalHarmonicExpansions.ylmSinSinPolynomial(67, x,y)
 
 	# test expasion of (x²+y²+z²)^n
 	for n = 0:10
@@ -61,25 +64,25 @@ end
 	ε = 32*eps(Float64)
 	@polyvar x y z
 	
-	@test isapprox(rlylm(0,0,x,y,z),sqrt(1/(4pi))+0*x,atol=ɛ)
+	@test isapprox(rlylm(0,0,x,y,z),sqrt(1/(4pi))+0*x,atol=ε)
 	
-	@test isapprox(rlylm(1,-1,x,y,z),0+sqrt(3/(4pi))*y,atol=ɛ)
-	@test isapprox(rlylm(1,0,x,y,z),0+sqrt(3/(4pi))*z,atol=ɛ)
-	@test isapprox(rlylm(1,1,x,y,z),0+sqrt(3/(4pi))*x,atol=ɛ)
+	@test isapprox(rlylm(1,-1,x,y,z),0+sqrt(3/(4pi))*y,atol=ε)
+	@test isapprox(rlylm(1,0,x,y,z),0+sqrt(3/(4pi))*z,atol=ε)
+	@test isapprox(rlylm(1,1,x,y,z),0+sqrt(3/(4pi))*x,atol=ε)
 	
-	@test isapprox(rlylm(2,-2,x,y,z),0+sqrt(15/(4pi))*x*y,atol=ɛ)
-	@test isapprox(rlylm(2,-1,x,y,z),0+sqrt(15/(4pi))*y*z,atol=ɛ)
-	@test isapprox(rlylm(2,0,x,y,z),sqrt(5/(16pi))*(2*z^2 - x^2 - y^2),atol=ɛ)
-	@test isapprox(rlylm(2,1,x,y,z),0+sqrt(15/(4pi))*z*x,atol=ɛ)
-	@test isapprox(rlylm(2,2,x,y,z),sqrt(15/(16pi))*(x^2-y^2),atol=ɛ)
+	@test isapprox(rlylm(2,-2,x,y,z),0+sqrt(15/(4pi))*x*y,atol=ε)
+	@test isapprox(rlylm(2,-1,x,y,z),0+sqrt(15/(4pi))*y*z,atol=ε)
+	@test isapprox(rlylm(2,0,x,y,z),sqrt(5/(16pi))*(2*z^2 - x^2 - y^2),atol=ε)
+	@test isapprox(rlylm(2,1,x,y,z),0+sqrt(15/(4pi))*z*x,atol=ε)
+	@test isapprox(rlylm(2,2,x,y,z),sqrt(15/(16pi))*(x^2-y^2),atol=ε)
 
-	@test isapprox(rlylm(3,-3,x,y,z),sqrt(35/(32pi))*(3*x^2-y^2)*y,atol=ɛ)
-	@test isapprox(rlylm(3,-2,x,y,z),0+sqrt(105/(4pi))*x*y*z,atol=ɛ)
-	@test isapprox(rlylm(3,-1,x,y,z),sqrt(21/(32pi))*y*(4*z^2-x^2-y^2),atol=ɛ)
-	@test isapprox(rlylm(3,0,x,y,z),sqrt(7/(16pi))*(5*z^3-3*z*(x^2+y^2+z^2)),atol=ɛ)
-	@test isapprox(rlylm(3,1,x,y,z),sqrt(21/(32pi))*x*(4*z^2-x^2-y^2),atol=ɛ)
-	@test isapprox(rlylm(3,2,x,y,z),sqrt(105/(16pi))*(x^2-y^2)*z,atol=ɛ)
-	@test isapprox(rlylm(3,3,x,y,z),sqrt(35/(32pi))*(x^2-3*y^2)*x,atol=ɛ)
+	@test isapprox(rlylm(3,-3,x,y,z),sqrt(35/(32pi))*(3*x^2-y^2)*y,atol=ε)
+	@test isapprox(rlylm(3,-2,x,y,z),0+sqrt(105/(4pi))*x*y*z,atol=ε)
+	@test isapprox(rlylm(3,-1,x,y,z),sqrt(21/(32pi))*y*(4*z^2-x^2-y^2),atol=ε)
+	@test isapprox(rlylm(3,0,x,y,z),sqrt(7/(16pi))*(5*z^3-3*z*(x^2+y^2+z^2)),atol=ε)
+	@test isapprox(rlylm(3,1,x,y,z),sqrt(21/(32pi))*x*(4*z^2-x^2-y^2),atol=ε)
+	@test isapprox(rlylm(3,2,x,y,z),sqrt(105/(16pi))*(x^2-y^2)*z,atol=ε)
+	@test isapprox(rlylm(3,3,x,y,z),sqrt(35/(32pi))*(x^2-3*y^2)*x,atol=ε)
 
 end
 

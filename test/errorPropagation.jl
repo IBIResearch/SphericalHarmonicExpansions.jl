@@ -10,10 +10,10 @@
     # Translation #
     ###############
     # Coefficients
-    Cspher = SphericalHarmonicCoefficients(zeros(25)); 
-    Cspher[3,-2] = 1/sqrt(15)*sqrt((4*pi)/(2*3+1));
-    Csolid = SphericalHarmonicCoefficients(zeros(25),1.0,true); 
-    Csolid[3,-2] = 1/sqrt(15);
+    Cspher = SphericalHarmonicCoefficients(zeros(25)); 
+    Cspher[3,-2] = 1/sqrt(15)*sqrt((4*pi)/(2*3+1));
+    Csolid = SphericalHarmonicCoefficients(zeros(25),1.0,true); 
+    Csolid[3,-2] = 1/sqrt(15);
 
     # Translation
     v = [1,-1,2]
